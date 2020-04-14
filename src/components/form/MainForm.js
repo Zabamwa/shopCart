@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import FormControl from "@material-ui/core/FormControl";
 import { RadioGroup, TextField } from "formik-material-ui";
-import {FormControlLabel, withStyles} from "@material-ui/core";
+import {FormControlLabel} from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import { Field, Form, Formik } from "formik";
-import { countryList } from "../constants/countryList";
+import { countryList } from "../../constants/countryList";
 import MenuItem from "@material-ui/core/MenuItem";
-import { TwoFormsFields } from "./TwoFormsFields";
+import { TwoFieldsForm } from "./TwoFieldsForm";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
@@ -15,11 +15,9 @@ import { inject, observer } from "mobx-react";
 import * as Yup from "yup";
 import {
   StringValidator,
-  NumberValidator,
   NIPValidator,
-} from "../utils/validators";
-import orderStore from "../stores/orderStore";
-import {withTranslation} from "react-i18next";
+} from "../../utils/validators";
+import orderStore from "../../stores/orderStore";
 
 class OrderForm {
   constructor(user) {
@@ -255,7 +253,7 @@ class MainForm extends Component {
                       </MenuItem>
                     ))}
                   </Field>
-                  <TwoFormsFields
+                  <TwoFieldsForm
                     t={t}
                     shortLeft={false}
                     firstField={"street"}
@@ -266,7 +264,7 @@ class MainForm extends Component {
                     InputLabelProps={InputLabelPropsStyles}
                     InputProps={InputPropsStyles}
                   />
-                  <TwoFormsFields
+                  <TwoFieldsForm
                     t={t}
                     shortLeft={true}
                     firstField={"postalCode"}
@@ -277,7 +275,7 @@ class MainForm extends Component {
                     InputLabelProps={InputLabelPropsStyles}
                     InputProps={InputPropsStyles}
                   />
-                  <TwoFormsFields
+                  <TwoFieldsForm
                     t={t}
                     shortLeft={true}
                     firstField={"phoneNumberPrefix"}

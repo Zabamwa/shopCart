@@ -2,10 +2,8 @@ import React from "react";
 import { fieldToTextField, TextField } from "formik-material-ui";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Field } from "formik";
-import { COLORS } from "../styles/colors";
+import { COLORS } from "../../styles/colors";
 import MuiTextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import { prefixList } from "../constants/prefixList";
 import conformToMask from "text-mask-core/src/conformToMask";
 const useStyles = makeStyles(() =>
   createStyles({
@@ -90,7 +88,7 @@ const MaskTextField = (props) => (
   />
 );
 
-export const TwoFormsFields = (props) => {
+export const TwoFieldsForm = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.containerField}>
