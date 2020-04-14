@@ -1,0 +1,59 @@
+{
+  "TITLE": "Sposób dostawy i płatności",
+  "ALERT": "Brak kolejnej części aplikacji. Dokończę po pozytywnym rozpatrzeniu mojej kandydatury :D",
+  "ORDER": {
+    "DATA": "Dane zamawiającego",
+    "PERSON": "Osoba prywatna",
+    "FIRST_NAME": "Imię",
+    "LAST_NAME": "Nazwisko",
+    "COMPANY": "Firma",
+    "COMPANY_NAME": "Nazwa Firmy",
+    "COMPANY_NIP": "NIP",
+    "COUNTRY": "Kraj",
+    "STREET": "Ulica",
+    "PHONE": "Tel.",
+    "ADDRESS_NUMBER": "Numer",
+    "POSTAL_CODE": "Kod pocztowy",
+    "CITY": "Miasto",
+    "PHONE_NUMBER_PREFIX": "Prefix",
+    "PHONE_NUMBER": "Numer telefonu",
+    "GET_INVOICE": "Chcę otrzymać papierową fakturę",
+    "INVOICE_YES": "Chce otrzymać papierową fakturę",
+    "INVOICE_NO": "Nie chce otrzymać papierowej faktury",
+    "SUMMARY": "Podsumowanie:",
+    "PRODUCT_VALUE": "Wartość produktów:",
+    "PRODUCT_VAT": "Wartość VAT (23%):",
+    "DELIVERY_VALUE": "Koszt dostawy:",
+    "ORDER_VALUE": "Suma",
+    "VAT": "Na nasze usługi aplikuje się przeniesienie stawki VAT. Odbiorca ma obowiązek zapłacenia VATu. Podana cena jest ceną netto"
+  },
+
+  "COUNTRY": {
+    "POLAND": "Polska",
+    "GERMANY": "Niemcy",
+    "UNITED_KINGDOM": "Wielka Brytania",
+    "FRANCE": "Francja",
+    "BELGIUM": "Belgia",
+    "SPAIN": "Hiszpania",
+    "ITALY": "Włochy"
+  },
+
+  "ERRORS": {
+    "FIELD_EMPTY": "Pole nie może być puste",
+    "FIELD_ONLY_NUMBER": "Pole może zawierać tylko cyfry",
+    "NIP_INVALID": "Podany NIP jest nieprawidłowy"
+  },
+
+  "BUTTONS": {
+    "NEXT": "Przejdź dalej",
+    "SAVE": "Zapisz",
+    "EDIT": "Edytuj",
+    "NEW_DATA": "Dodaj nowe dane",
+    "LANGUAGE": "Język"
+  },
+
+  "LANGUAGE": {
+    "POLISH": "Polski",
+    "ENGLISH": "Angielski"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "TITLE": "Delivery and payment method",
+  "ALERT": "No further part of the application. I will finish after the successful consideration of my candidacy :D",
+  "ORDER": {
+    "DATA": "Customer data",
+    "PERSON": "Private person",
+    "FIRST_NAME": "Name",
+    "LAST_NAME": "Surname",
+    "COMPANY": "Company",
+    "COMPANY_NAME": "Company Name",
+    "COMPANY_NIP": "Tax ID",
+    "PHONE": "Phone",
+    "COUNTRY": "Country",
+    "STREET": "Street",
+    "ADDRESS_NUMBER": "Number",
+    "POSTAL_CODE": "Postal Code",
+    "CITY": "City",
+    "PHONE_NUMBER_PREFIX": "Prefix",
+    "PHONE_NUMBER": "Phone Number",
+    "GET_INVOICE": "I want to receive a paper invoice",
+    "INVOICE_YES": "I want to receive a paper invoice",
+    "INVOICE_NO": "I don't want to receive a paper invoice",
+    "SUMMARY": "Summary:",
+    "PRODUCT_VALUE": "Value of products:",
+    "PRODUCT_VAT": "Value of VAT (23%):",
+    "DELIVERY_VALUE": "Cost of delivery:",
+    "ORDER_VALUE": "Amount",
+    "VAT": "Transfer of VAT rate is applied to our services. The recipient is obliged to pay VAT. The price is a net price"
+  },
+
+  "COUNTRY": {
+    "POLAND": "Poland",
+    "GERMANY": "Germany",
+    "UNITED_KINGDOM": "United Kingdom",
+    "FRANCE": "France",
+    "BELGIUM": "Belgium",
+    "SPAIN": "Spain",
+    "ITALY": "Italy"
+  },
+
+  "ERRORS": {
+    "FIELD_EMPTY": "The field cannot be empty",
+    "FIELD_ONLY_NUMBER": "The field can only contain numbers",
+    "NIP_INVALID": "The tax ID provided is not valid"
+  },
+
+  "BUTTONS": {
+    "NEXT": "Next",
+    "SAVE": "Save",
+    "EDIT": "Edit",
+    "NEW_DATA": "Add new data",
+    "LANGUAGE": "Language"
+  },
+
+  "LANGUAGE": {
+    "POLISH": "Polish",
+    "ENGLISH": "English"
+  }
+}
