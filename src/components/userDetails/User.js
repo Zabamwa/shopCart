@@ -6,13 +6,13 @@ import Radio from "@material-ui/core/Radio";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { ORDER_TYPE } from "../../constants/orderType";
 import Button from "@material-ui/core/Button";
-import {COLORS} from "../../styles/colors";
+import { COLORS } from "../../styles/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
     radioUser: {
       padding: "9px 0",
-        color:COLORS.ORANGE + '!important',
+      color: COLORS.ORANGE + "!important",
     },
 
     userInformation: {
@@ -59,7 +59,7 @@ const User = (props) => {
           <Radio
             key={user.id}
             className={classes.radioUser}
-            classes={{root:classes.radioUser}}
+            classes={{ root: classes.radioUser }}
             checked={Number(selectedUser) === user.id}
             onChange={handleChange}
             value={user.id}

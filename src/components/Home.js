@@ -190,20 +190,20 @@ const styles = (theme) =>
     },
 
     btnSave: {
-        background: COLORS.PRIMARY,
+      background: COLORS.PRIMARY,
+      color: COLORS.WHITE,
+      fontWeight: 600,
+      width: "70%",
+      margin: "20px 0",
+      textTransform: "none",
+      "&:hover": {
+        background: COLORS.ORANGE,
+      },
+      "&:disabled": {
+        backgroundColor: COLORS.PRIMARY,
+        opacity: 0.4,
         color: COLORS.WHITE,
-        fontWeight: 600,
-        width: "70%",
-        margin: "20px 0",
-        textTransform: "none",
-        "&:hover": {
-            background: COLORS.ORANGE,
-        },
-        "&:disabled": {
-            backgroundColor: COLORS.PRIMARY,
-            opacity:0.4,
-            color: COLORS.WHITE,
-        },
+      },
     },
 
     vatInfo: {

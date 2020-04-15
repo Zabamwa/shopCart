@@ -20,7 +20,7 @@ import { countryList } from "../../constants/countryList";
 import { TwoFieldsForm } from "./TwoFieldsForm";
 import OrderForm from "../../model/userModel";
 import { ORDER_TYPE } from "../../constants/orderType";
-import {COLORS} from "../../styles/colors";
+import { COLORS } from "../../styles/colors";
 
 const OrderSchema = Yup.object().shape({
   firstName: Yup.string().when("orderType", {
@@ -296,13 +296,13 @@ class MainForm extends Component {
                       type="submit"
                       variant="contained"
                       color="primary"
-                      classes={{root: classes.btnSave}}
+                      classes={{ root: classes.btnSave }}
                     >
                       {pending ? (
                         <CircularProgress
                           size={20}
                           thickness={5}
-                          color='secondary'
+                          color="secondary"
                         />
                       ) : (
                         <div>{t("BUTTONS.SAVE")}</div>

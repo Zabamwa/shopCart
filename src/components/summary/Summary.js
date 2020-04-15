@@ -15,22 +15,22 @@ const useStyles = makeStyles(() =>
         "0px 2px 5px 3px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
     },
 
-      btn: {
-          background: COLORS.PRIMARY,
-          color: COLORS.WHITE,
-          fontWeight: 600,
-          width: "100%",
-          margin: "20px 0",
-          textTransform: "none",
-          "&:hover": {
-              background: COLORS.ORANGE,
-          },
-          "&:disabled": {
-              backgroundColor: COLORS.PRIMARY,
-              opacity:0.4,
-              color: COLORS.WHITE,
-          },
+    btn: {
+      background: COLORS.PRIMARY,
+      color: COLORS.WHITE,
+      fontWeight: 600,
+      width: "100%",
+      margin: "20px 0",
+      textTransform: "none",
+      "&:hover": {
+        background: COLORS.ORANGE,
       },
+      "&:disabled": {
+        backgroundColor: COLORS.PRIMARY,
+        opacity: 0.4,
+        color: COLORS.WHITE,
+      },
+    },
 
     cartTitle: {
       fontWeight: 600,
@@ -85,7 +85,7 @@ const Summary = (props) => {
         disabled={!send}
         variant="contained"
         color="primary"
-        classes={{root: classes.btn}}
+        classes={{ root: classes.btn }}
       >
         <div>{t("BUTTONS.NEXT")}</div>
       </Button>

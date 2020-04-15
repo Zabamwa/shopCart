@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import {COLORS} from "../styles/colors";
+import { COLORS } from "../styles/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -23,7 +23,7 @@ const useStyles = makeStyles(() =>
 
     subtitleInfo: {
       marginLeft: 10,
-        color:COLORS.GREY
+      color: COLORS.GREY,
     },
 
     subtitle: {

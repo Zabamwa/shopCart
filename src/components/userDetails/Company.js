@@ -1,7 +1,7 @@
 import React from "react";
 import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import {COLORS} from "../../styles/colors";
+import { COLORS } from "../../styles/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() =>
 
     userTypeIcon: {
       marginLeft: 5,
-        color:COLORS.GREY
+      color: COLORS.GREY,
     },
   })
 );
