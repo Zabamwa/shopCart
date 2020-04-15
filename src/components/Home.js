@@ -114,7 +114,7 @@ class Home extends Component {
             <Summary
               classes={classes}
               send={send}
-              orderType={userList.orderType}
+              orderType={this.props.userStore.orderType}
               t={t}
               orderNextStep={this.orderNextStep}
             />

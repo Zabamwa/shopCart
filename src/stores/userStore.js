@@ -8,6 +8,7 @@ class UserStore {
   @observable userList = [];
   @observable user = {};
   @observable id = "";
+  @observable orderType = "";
 
   @observable send = false;
   @observable edit = false;
@@ -51,6 +52,11 @@ class UserStore {
   };
 
   @action
+  setOrderType = (data) => {
+    this.orderType = data[0].orderType;
+  };
+
+  @action
   setId = (id) => {
     this.id = id;
   };
@@ -61,6 +67,7 @@ class UserStore {
     const result = await userService.addUser(data, this.userList);
     this.pendingEnd();
     this.addUser(result.data);
+    this.setOrderType(result.data);
     this.editModeAction(true);
     this.addModeAction(false);
     return true;
@@ -72,6 +79,7 @@ class UserStore {
     const result = await userService.editUser(data, this.userList);
     this.pendingEnd();
     this.addUser(result.data);
+    this.setOrderType(result.data);
     this.editModeAction(true);
     this.addModeAction(false);
     this.editModeUserAction(false);
