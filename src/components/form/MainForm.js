@@ -57,7 +57,7 @@ class MainForm extends Component {
   };
 
   componentDidMount() {
-    if (this.props.userStore.id !== "") {
+    if (this.props.userStore.id !== "" && this.props.userStore.edit) {
       this.props.userStore.getUserAction(this.props.userStore.id);
     }
   }
