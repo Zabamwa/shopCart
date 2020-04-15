@@ -95,6 +95,7 @@ class Home extends Component {
             {!send || add ? (
               <MainForm
                 classes={classes}
+                pending={pending}
                 t={t}
                 InputLabelPropsStyles={InputLabelPropsStyles}
                 InputPropsStyles={InputPropsStyles}
@@ -190,23 +191,20 @@ const styles = (theme) =>
     },
 
     btnSave: {
-      background: COLORS.PRIMARY,
-      color: COLORS.WHITE,
-      fontWeight: 600,
-      width: "70%",
-      textTransform: "none",
-      "&:hover": {
-        background: COLORS.SECONDARY,
-      },
-    },
-
-    btnSaveDisabled: {
-      background: COLORS.PRIMARY,
-      color: COLORS.WHITE,
-      fontWeight: 600,
-      width: "70%",
-      textTransform: "none",
-      opacity: 0.4,
+        background: COLORS.PRIMARY,
+        color: COLORS.WHITE,
+        fontWeight: 600,
+        width: "70%",
+        margin: "20px 0",
+        textTransform: "none",
+        "&:hover": {
+            background: COLORS.SECONDARY,
+        },
+        "&:disabled": {
+            backgroundColor: COLORS.PRIMARY,
+            opacity:0.4,
+            color: COLORS.WHITE,
+        },
     },
 
     vatInfo: {
@@ -228,28 +226,6 @@ const styles = (theme) =>
       color: COLORS.SECONDARY,
       marginRight: 10,
       fontSize: 28,
-    },
-
-    btn: {
-      background: COLORS.PRIMARY,
-      color: COLORS.WHITE,
-      fontWeight: 600,
-      width: "100%",
-      margin: "20px 0",
-      textTransform: "none",
-      "&:hover": {
-        background: COLORS.SECONDARY,
-      },
-    },
-
-    btnDisabled: {
-      color: COLORS.WHITE + "!important",
-      fontWeight: 600,
-      width: "100%",
-      margin: "20px 0",
-      textTransform: "none",
-      backgroundColor: COLORS.PRIMARY + "!important",
-      opacity: "0.4",
     },
 
     userName: {
