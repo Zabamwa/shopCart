@@ -95,7 +95,6 @@ class Home extends Component {
             {!send || add ? (
               <MainForm
                 classes={classes}
-                pending={pending}
                 t={t}
                 InputLabelPropsStyles={InputLabelPropsStyles}
                 InputPropsStyles={InputPropsStyles}
@@ -198,7 +197,7 @@ const styles = (theme) =>
         margin: "20px 0",
         textTransform: "none",
         "&:hover": {
-            background: COLORS.SECONDARY,
+            background: COLORS.ORANGE,
         },
         "&:disabled": {
             backgroundColor: COLORS.PRIMARY,

@@ -302,7 +302,7 @@ class MainForm extends Component {
                         <CircularProgress
                           size={20}
                           thickness={5}
-                          color={COLORS.BLACK}
+                          color='secondary'
                         />
                       ) : (
                         <div>{t("BUTTONS.SAVE")}</div>

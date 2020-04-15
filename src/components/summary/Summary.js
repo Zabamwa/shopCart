@@ -23,7 +23,7 @@ const useStyles = makeStyles(() =>
           margin: "20px 0",
           textTransform: "none",
           "&:hover": {
-              background: COLORS.SECONDARY,
+              background: COLORS.ORANGE,
           },
           "&:disabled": {
               backgroundColor: COLORS.PRIMARY,
