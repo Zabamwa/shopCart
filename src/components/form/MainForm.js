@@ -57,9 +57,9 @@ class MainForm extends Component {
   };
 
   componentDidMount() {
-    if(this.props.userStore.id !== '')
-    this.props.userStore.getUserAction(this.props.userStore.id)
-    this.props.userStore.setId(null)
+    if (this.props.userStore.id !== "") {
+      this.props.userStore.getUserAction(this.props.userStore.id);
+    }
   }
 
   submit = (values) => {

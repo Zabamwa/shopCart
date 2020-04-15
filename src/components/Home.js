@@ -9,7 +9,6 @@ import User from "./userDetails/User";
 import i18n from "../config/i18n";
 import ChangeLanguage from "./ChangeLanguage";
 import Title from "./Title";
-import {toJS} from "mobx";
 
 @inject("appStore", "userStore")
 @observer
