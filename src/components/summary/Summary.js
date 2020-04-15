@@ -3,11 +3,64 @@ import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import React from "react";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { COLORS } from "../../styles/colors";
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    summaryCard: {
+      padding: 20,
+      boxShadow:
+        "0px 2px 5px 3px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
+    },
+
+    btn: {
+      background: COLORS.PRIMARY,
+      color: COLORS.WHITE,
+      fontWeight: 600,
+      width: "100%",
+      margin: "20px 0",
+      textTransform: "none",
+      "&:hover": {
+        background: COLORS.SECONDARY,
+      },
+    },
+
+    btnDisabled: {
+      color: COLORS.WHITE + "!important",
+      fontWeight: 600,
+      width: "100%",
+      margin: "20px 0",
+      textTransform: "none",
+      backgroundColor: COLORS.PRIMARY + "!important",
+      opacity: "0.4",
+    },
+
+    cartTitle: {
+      fontWeight: 600,
+    },
+
+    summaryCart: {
+      display: "flex",
+      justifyContent: "space-between",
+      height: 35,
+    },
+
+    summaryValue: {
+      fontSize: 20,
+      fontWeight: 600,
+      marginTop: 10,
+    },
+
+    beforeDivider: {
+      marginBottom: 20,
+    },
+  })
+);
 const Summary = (props) => {
-  const { classes, pending, t, send, orderType, orderNextStep } = props;
+  const { t, send, orderType, orderNextStep } = props;
+  const classes = useStyles();
   return (
     <Card className={classes.summaryCard}>
       <Typography className={classes.cartTitle} display="block" variant="h6">
@@ -39,11 +92,7 @@ const Summary = (props) => {
         color="primary"
         className={send === true ? classes.btn : classes.btnDisabled}
       >
-        {pending ? (
-          <CircularProgress size={20} thickness={5} color="primary" />
-        ) : (
-          <div>{t("BUTTONS.NEXT")}</div>
-        )}
+        <div>{t("BUTTONS.NEXT")}</div>
       </Button>
     </Card>
   );

@@ -1,16 +1,15 @@
 import React from "react";
-import "./App.css";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "mobx-react";
 import Home from "./components/Home";
 import appStore from "./stores/appStore";
-import orderStore from "./stores/orderStore";
+import userStore from "./stores/userStore";
 import { COLORS } from "./styles/colors";
 
 export const stores = {
   appStore,
-  orderStore,
+  userStore,
 };
 
 const theme = createMuiTheme({

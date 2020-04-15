@@ -1,89 +1,95 @@
 import React, { Component } from "react";
+import { inject, observer } from "mobx-react";
 import FormControl from "@material-ui/core/FormControl";
-import { RadioGroup, TextField } from "formik-material-ui";
-import {FormControlLabel} from "@material-ui/core";
+import { FormControlLabel } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
-import { Field, Form, Formik } from "formik";
-import { countryList } from "../../constants/countryList";
 import MenuItem from "@material-ui/core/MenuItem";
-import { TwoFieldsForm } from "./TwoFieldsForm";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
-import { inject, observer } from "mobx-react";
+import { RadioGroup, TextField } from "formik-material-ui";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import {
   StringValidator,
   NIPValidator,
+  NumberValidator,
 } from "../../utils/validators";
-import orderStore from "../../stores/orderStore";
+import { countryList } from "../../constants/countryList";
+import { TwoFieldsForm } from "./TwoFieldsForm";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import OrderForm from "../../model/userModel";
+import { ORDER_TYPE } from "../../constants/orderType";
 
-class OrderForm {
-  constructor(user) {
-    if (user) {
-      this.firstName = user.firstName || "";
-      this.lastName = user.lastName || "";
-      this.companyName = user.companyName || "";
-      this.companyNip = user.companyNip || "";
-      this.country = user.country || "";
-      this.street = user.street || "";
-      this.number = user.number || "";
-      this.postalCode = user.postalCode || "";
-      this.invoice = user.invoice || "";
-      this.orderType = user.orderType || "person";
-      this.addressNumber = user.addressNumber || "";
-      this.city = user.city || "";
-      this.phoneNumberPrefix = user.phoneNumberPrefix || "";
-      this.phoneNumber = user.phoneNumber || "";
-    }
-  }
+const OrderSchema = Yup.object().shape({
+  firstName: Yup.string().when("orderType", {
+    is: (val) => val === "person",
+    then: StringValidator,
+  }),
+  lastName: Yup.string().when("orderType", {
+    is: (val) => val === "person",
+    then: StringValidator,
+  }),
+  companyName: Yup.string().when("orderType", {
+    is: (val) => val === "company",
+    then: StringValidator,
+  }),
+  companyNip: Yup.number().when("orderType", {
+    is: (val) => val === "company",
+    then: NIPValidator,
+  }),
+  country: StringValidator,
+  street: StringValidator,
+  addressNumber: StringValidator,
+  postalCode: NumberValidator(6),
+  city: StringValidator,
+  phoneNumberPrefix: NumberValidator(3),
+  phoneNumber: NumberValidator(11),
+  orderType: StringValidator,
+});
 
-  firstName = "";
-  lastName = "";
-  companyName = "";
-  companyNip = "";
-  country = "";
-  street = "";
-  addressNumber = "";
-  postalCode = "";
-  city = "";
-  phoneNumberPrefix = "";
-  phoneNumber = "";
-  orderType = "";
-  invoice = "";
-}
-
-@inject("appStore", "orderStore")
+@inject("appStore", "userStore")
 @observer
 class MainForm extends Component {
   state = {
     orderType: "person",
     invoice: false,
-    user: "",
   };
 
   componentDidMount() {
-    if (this.props.orderStore.add) {
-      this.resetUser();
-    }
+    if(this.props.userStore.id !== '')
+    this.props.userStore.getUserAction(this.props.userStore.id)
+    this.props.userStore.setId(null)
   }
 
-  resetUser = () => {
-    this.props.orderStore.resetUser();
+  submit = (values) => {
+    if (this.props.userStore.edit) {
+      this.editUser(values);
+    } else {
+      this.addUser(values);
+    }
   };
 
   addUser = (values) => {
-    setTimeout(() => {
-      this.props.orderStore.addUserAction(values);
-    }, 1000);
+    if (values.invoice === "") {
+      values.invoice = false;
+    }
+    values.id = Date.now();
+    this.props.userStore.addUserAction(values);
+  };
+
+  editUser = (values) => {
+    if (values.invoice === "") {
+      values.invoice = false;
+    }
+    this.props.userStore.editUserAction(values);
   };
 
   handleRadioChange = (event, setFieldValue) => {
     this.setState({ orderType: event.target.value }, () =>
       setFieldValue("orderType", this.state.orderType)
     );
-    if (event.target.value === "person") {
+    if (event.target.value === ORDER_TYPE.PERSON) {
       setFieldValue("companyName", "");
       setFieldValue("companyNip", "");
     } else {
@@ -93,8 +99,11 @@ class MainForm extends Component {
   };
 
   handleInvoiceCheckbox = (event, setFieldValue) => {
-    this.setState({ invoice: !this.state.invoice }, () =>
-      setFieldValue("invoice", this.state.invoice)
+    this.setState(
+      (prevState, props) => {
+        return { invoice: !prevState.invoice };
+      },
+      () => setFieldValue("invoice", this.state.invoice)
     );
   };
 
@@ -104,43 +113,16 @@ class MainForm extends Component {
       t,
       InputLabelPropsStyles,
       InputPropsStyles,
-      orderStore: { user },
-      pending,
+      userStore: { pending, user },
     } = this.props;
 
-    const OrderSchema = Yup.object().shape({
-      firstName: Yup.string().when("orderType", {
-        is: (val) => val === "person",
-        then: StringValidator,
-      }),
-      lastName: Yup.string().when("orderType", {
-        is: (val) => val === "person",
-        then: StringValidator,
-      }),
-      companyName: Yup.string().when("orderType", {
-        is: (val) => val === "company",
-        then: StringValidator,
-      }),
-      companyNip: Yup.number().when("orderType", {
-        is: (val) => val === "company",
-        then: NIPValidator,
-      }),
-      country: StringValidator,
-      street: StringValidator,
-      addressNumber: StringValidator,
-      postalCode: StringValidator,
-      city: StringValidator,
-      phoneNumberPrefix: StringValidator,
-      phoneNumber: StringValidator,
-      orderType: StringValidator,
-    });
     return (
       <Formik
         enableReinitialize
         initialValues={new OrderForm(user)}
         validationSchema={OrderSchema}
         onSubmit={(values, actions) => {
-          this.addUser(values).then(() => {
+          this.submit(values).then(() => {
             actions.setSubmitting(false);
           });
         }}
@@ -188,17 +170,17 @@ class MainForm extends Component {
 
                   <Field
                     id={
-                      values.orderType === "company"
+                      values.orderType === ORDER_TYPE.COMPANY
                         ? "companyName"
                         : "firstName"
                     }
                     name={
-                      values.orderType === "company"
+                      values.orderType === ORDER_TYPE.COMPANY
                         ? "companyName"
                         : "firstName"
                     }
                     label={t(
-                      values.orderType === "company"
+                      values.orderType === ORDER_TYPE.COMPANY
                         ? "ORDER.COMPANY_NAME"
                         : "ORDER.FIRST_NAME"
                     )}
@@ -213,13 +195,17 @@ class MainForm extends Component {
                   />
                   <Field
                     id={
-                      values.orderType === "company" ? "companyNip" : "lastName"
+                      values.orderType === ORDER_TYPE.COMPANY
+                        ? "companyNip"
+                        : "lastName"
                     }
                     name={
-                      values.orderType === "company" ? "companyNip" : "lastName"
+                      values.orderType === ORDER_TYPE.COMPANY
+                        ? "companyNip"
+                        : "lastName"
                     }
                     label={t(
-                      values.orderType === "company"
+                      values.orderType === ORDER_TYPE.COMPANY
                         ? "ORDER.COMPANY_NIP"
                         : "ORDER.LAST_NAME"
                     )}
@@ -242,7 +228,7 @@ class MainForm extends Component {
                     autoComplete="off"
                     margin="normal"
                     required
-                    value={user.country}
+                    value={values.country}
                     variant="outlined"
                     InputLabelProps={InputLabelPropsStyles}
                     InputProps={InputPropsStyles}
@@ -301,7 +287,7 @@ class MainForm extends Component {
                         color="primary"
                       />
                     }
-                    label={t("ORDER.GET_INVOICE")}
+                    label={t("ORDER.INVOICE_YES")}
                   />
                   <div className={classes.saveData}>
                     <Button
@@ -310,7 +296,7 @@ class MainForm extends Component {
                       variant="contained"
                       color="primary"
                       className={
-                        !pending ? classes.btnSave : classes.btnDisabled
+                        !pending ? classes.btnSave : classes.btnSaveDisabled
                       }
                     >
                       {pending ? (

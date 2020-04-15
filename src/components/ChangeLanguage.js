@@ -2,16 +2,50 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { COLORS } from "../styles/colors";
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    topBarButton: {
+      color: COLORS.BLACK,
+      fontSize: 16,
+      fontWeight: "bold",
+      textTransform: "capitalize",
+      background: "rgba(0,0,0,0.1)",
+    },
+
+    topBarButtonWrap: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+
+    languageBox: {
+      borderRadius: "100%",
+      backgroundColor: COLORS.PRIMARY,
+      color: COLORS.WHITE,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      marginLeft: 5,
+      marginRight: 5,
+      padding: 7,
+      width: 15,
+      height: 15,
+      fontSize: 13,
+    },
+  })
+);
 const ChangeLanguage = (props) => {
   const {
-    classes,
     t,
     language,
     openLangPicker,
     handleLangPickerClick,
     handleLangPickerClose,
   } = props;
+  const classes = useStyles();
   return (
     <>
       <Button
@@ -33,7 +67,9 @@ const ChangeLanguage = (props) => {
         open={Boolean(openLangPicker)}
         onClose={handleLangPickerClose(null)}
       >
-        <MenuItem onClick={handleLangPickerClose("pl")}>{t("LANGUAGE.POLISH")}</MenuItem>
+        <MenuItem onClick={handleLangPickerClose("pl")}>
+          {t("LANGUAGE.POLISH")}
+        </MenuItem>
         <MenuItem onClick={handleLangPickerClose("en")}>
           {t("LANGUAGE.ENGLISH")}
         </MenuItem>

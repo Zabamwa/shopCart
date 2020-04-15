@@ -5,11 +5,11 @@ export const StringValidator = Yup.string()
   .required(() => i18n.t("ERRORS.FIELD_EMPTY"))
   .nullable();
 
-export const NumberValidator = Yup.number()
-  .transform((v, o) => (o === "" ? null : v))
+export const NumberValidator = (length) =>
+  Yup.string()
     .required(() => i18n.t("ERRORS.FIELD_EMPTY"))
-  .typeError(i18n.t("ERRORS.FIELD_ONLY_NUMBER"))
-  .nullable();
+    .min(length, i18n.t("ERRORS.INVALID_MASK"))
+    .max(length, i18n.t("ERRORS.INVALID_MASK"));
 
 export const NIPValidator = () => {
   const weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
@@ -28,5 +28,5 @@ export const NIPValidator = () => {
       "nipPattern",
       () => i18n.t("ERRORS.NIP_INVALID"),
       (value) => value === true
-    )
+    );
 };

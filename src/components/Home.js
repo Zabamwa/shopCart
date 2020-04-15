@@ -9,8 +9,9 @@ import User from "./userDetails/User";
 import i18n from "../config/i18n";
 import ChangeLanguage from "./ChangeLanguage";
 import Title from "./Title";
+import {toJS} from "mobx";
 
-@inject("appStore", "orderStore")
+@inject("appStore", "userStore")
 @observer
 class Home extends Component {
   state = {
@@ -23,15 +24,19 @@ class Home extends Component {
     this.setState({ language: this.props.appStore.locale });
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
-
   editMode = () => {
-    this.props.orderStore.editModeAction(false);
+    this.props.userStore.editModeAction(false);
+    this.props.userStore.editModeUserAction(true);
+    if (this.props.userStore.id === "") {
+      this.props.userStore.getUserAction(this.props.userStore.userList[0].id);
+    } else {
+      this.props.userStore.getUserAction(this.props.userStore.id);
+    }
   };
 
   addMode = () => {
-    this.props.orderStore.editModeAction(false);
-    this.props.orderStore.addModeAction(true);
+    this.props.userStore.editModeAction(false);
+    this.props.userStore.addModeAction(true);
   };
 
   orderNextStep = () => {
@@ -55,7 +60,7 @@ class Home extends Component {
     const {
       classes,
       t,
-      orderStore: { user, send, add },
+      userStore: { userList, user, send, add },
     } = this.props;
 
     const InputLabelPropsStyles = {
@@ -76,7 +81,6 @@ class Home extends Component {
         <div className={classes.content}>
           <div className={classes.orderData}>
             <ChangeLanguage
-              classes={classes}
               t={t}
               handleLangPickerClose={this.handleLangPickerClose}
               handleLangPickerClick={this.handleLangPickerClick}
@@ -84,26 +88,34 @@ class Home extends Component {
               openLangPicker={this.state.openLangPicker}
             />
             <Title
-              classes={classes}
               t={t}
               addMode={this.addMode}
               editMode={this.editMode}
-              send={this.props.orderStore.send}
+              send={this.props.userStore.send}
             />
-            {((!send || add) && (
+            {!send || add ? (
               <MainForm
                 classes={classes}
                 t={t}
                 InputLabelPropsStyles={InputLabelPropsStyles}
                 InputPropsStyles={InputPropsStyles}
               />
-            )) || <User user={user} t={t} classes={classes} />}
+            ) : (
+              <User
+                users={user}
+                addMode={this.addMode}
+                editMode={this.editMode}
+                t={t}
+                userStore={this.props.userStore}
+                selectedUser={user[0].id}
+              />
+            )}
           </div>
           <div className={classes.summary}>
             <Summary
               classes={classes}
               send={send}
-              orderType={user.orderType}
+              orderType={userList.orderType}
               t={t}
               orderNextStep={this.orderNextStep}
             />
@@ -121,45 +133,6 @@ const styles = (theme) =>
       maxWidth: 1400,
       width: "100%",
       margin: "auto",
-    },
-
-    topBarButton: {
-      color: COLORS.BLACK,
-      fontSize: 16,
-      fontWeight: "bold",
-      textTransform: "capitalize",
-        background:'rgba(0,0,0,0.1)'
-    },
-
-    topBarButtonWrap: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-
-    languageBox: {
-      borderRadius: "100%",
-      backgroundColor: COLORS.PRIMARY,
-      color: COLORS.WHITE,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      marginLeft: 5,
-      marginRight: 5,
-      padding: 7,
-      width: 15,
-      height: 15,
-      fontSize: 13,
-    },
-
-    subtitleContainer: {
-      display: "flex",
-      justifyContent: "space-between",
-    },
-
-    subtitleBtnContainer: {
-      display: "flex",
-      alignItems: "flex-end",
     },
 
     textField: {
@@ -181,9 +154,14 @@ const styles = (theme) =>
         flexDirection: "column",
       },
     },
+    summary: {
+      flex: 1,
+      margin: "100px 50px",
 
-    subtitle: {
-      marginTop: 10,
+      "@media (max-width:850px)": {
+        margin: "50px 0",
+        padding: 30,
+      },
     },
 
     radioRow: {
@@ -223,6 +201,15 @@ const styles = (theme) =>
       },
     },
 
+    btnSaveDisabled: {
+      background: COLORS.PRIMARY,
+      color: COLORS.WHITE,
+      fontWeight: 600,
+      width: "70%",
+      textTransform: "none",
+      opacity: 0.4,
+    },
+
     vatInfo: {
       flex: 1,
       padding: "0 20px",
@@ -244,51 +231,12 @@ const styles = (theme) =>
       fontSize: 28,
     },
 
-    subtitleInfo: {
-      marginLeft: 10,
-    },
-
-    summary: {
-      flex: 1,
-      margin: '100px 50px',
-
-      "@media (max-width:850px)": {
-        margin: "50px 0",
-        padding: 30,
-      },
-    },
-
-    summaryCard: {
-      padding: 20,
-        boxShadow: '0px 2px 5px 3px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)'
-    },
-
-    cartTitle: {
-      fontWeight: 600,
-    },
-
-    summaryCart: {
-      display: "flex",
-      justifyContent: "space-between",
-      height: 35,
-    },
-
-    summaryValue: {
-      fontSize: 20,
-      fontWeight: 600,
-      marginTop: 10,
-    },
-
-    beforeDivider: {
-      marginBottom: 20,
-    },
-
     btn: {
       background: COLORS.PRIMARY,
       color: COLORS.WHITE,
       fontWeight: 600,
       width: "100%",
-      margin: '20px 0',
+      margin: "20px 0",
       textTransform: "none",
       "&:hover": {
         background: COLORS.SECONDARY,
@@ -299,20 +247,10 @@ const styles = (theme) =>
       color: COLORS.WHITE + "!important",
       fontWeight: 600,
       width: "100%",
-      margin: '20px 0',
+      margin: "20px 0",
       textTransform: "none",
       backgroundColor: COLORS.PRIMARY + "!important",
       opacity: "0.4",
-    },
-
-    userType: {
-      fontWeight: 600,
-      fontSize: 16,
-      display: "flex",
-    },
-
-    userTypeIcon: {
-      marginLeft: 5,
     },
 
     userName: {
@@ -321,26 +259,10 @@ const styles = (theme) =>
       margin: "2px 0",
     },
 
-    userInformation: {
-      margin: "2px 0",
-    },
-
-    userInvoice: {
-      marginTop: 10,
-    },
-
-    userDivider: {
-      display: "flex",
-      justifyContent: "flex-end",
-    },
-
-    userDetailDivider: {
-      marginTop: 75,
-      width: "70%",
-    },
-
     inputLabel: {
       color: `${COLORS.BLACK} !important`,
+      width: "75%",
+      fontSize: 14,
     },
     outlinedInput: {
       color: COLORS.BLACK,
@@ -348,23 +270,9 @@ const styles = (theme) =>
     outlinedInputFocused: {
       color: COLORS.BLACK,
     },
-
-    select: {
-      width: "100%",
-      maxWidth: 380,
-      height: 56,
-      marginTop: 10,
-      borderRadius: 5,
-      borderColor: COLORS.WHITE,
-      background: "rgba(255, 255, 255, 0.12)",
-    },
     notchedOutline: {
       borderWidth: 1,
       borderColor: COLORS.BLACK + "!important",
-    },
-
-    formControl: {
-      background: "rgba(255, 255, 255, 0.12)",
     },
 
     content: {
@@ -385,26 +293,6 @@ const styles = (theme) =>
       "@media (max-width:850px)": {
         flex: 1,
       },
-    },
-
-    cardContainer: {
-      background: "transparent",
-      display: "flex",
-      flexDirection: "column",
-      width: "80%",
-      margin: "0 auto",
-      boxShadow: "none",
-      overflow: "visible",
-    },
-
-    cardContent: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-
-    cardAction: {
-      justifyContent: "center",
     },
   });
 

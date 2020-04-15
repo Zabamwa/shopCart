@@ -17,7 +17,6 @@
     "CITY": "Miasto",
     "PHONE_NUMBER_PREFIX": "Prefix",
     "PHONE_NUMBER": "Numer telefonu",
-    "GET_INVOICE": "Chcę otrzymać papierową fakturę",
     "INVOICE_YES": "Chce otrzymać papierową fakturę",
     "INVOICE_NO": "Nie chce otrzymać papierowej faktury",
     "SUMMARY": "Podsumowanie:",
@@ -41,7 +40,8 @@
   "ERRORS": {
     "FIELD_EMPTY": "Pole nie może być puste",
     "FIELD_ONLY_NUMBER": "Pole może zawierać tylko cyfry",
-    "NIP_INVALID": "Podany NIP jest nieprawidłowy"
+    "NIP_INVALID": "Podany NIP jest nieprawidłowy",
+    "INVALID_MASK": "Za mało znaków"
   },
 
   "BUTTONS": {

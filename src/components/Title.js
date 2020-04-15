@@ -3,13 +3,39 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    subtitleContainer: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+
+    subtitleBtnContainer: {
+      display: "flex",
+      alignItems: "flex-end",
+      "@media (max-width:600px)": {
+        display: "none",
+      },
+    },
+
+    subtitleInfo: {
+      marginLeft: 10,
+    },
+
+    subtitle: {
+      marginTop: 10,
+    },
+  })
+);
 const Title = (props) => {
-  const { classes, t, editMode, addMode, send } = props;
+  const { t, editMode, addMode, send } = props;
+  const classes = useStyles();
   return (
     <>
       <div className={"titleContainer"}>
-        <Typography className={classes.title} display="block" variant="h5">
+        <Typography display="block" variant="h5">
           {t("TITLE")}
         </Typography>
       </div>

@@ -17,7 +17,6 @@
     "CITY": "City",
     "PHONE_NUMBER_PREFIX": "Prefix",
     "PHONE_NUMBER": "Phone Number",
-    "GET_INVOICE": "I want to receive a paper invoice",
     "INVOICE_YES": "I want to receive a paper invoice",
     "INVOICE_NO": "I don't want to receive a paper invoice",
     "SUMMARY": "Summary:",
@@ -41,7 +40,8 @@
   "ERRORS": {
     "FIELD_EMPTY": "The field cannot be empty",
     "FIELD_ONLY_NUMBER": "The field can only contain numbers",
-    "NIP_INVALID": "The tax ID provided is not valid"
+    "NIP_INVALID": "The tax ID provided is not valid",
+    "INVALID_MASK": "Not enough characters"
   },
 
   "BUTTONS": {

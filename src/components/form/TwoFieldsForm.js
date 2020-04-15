@@ -28,6 +28,8 @@ const useStyles = makeStyles(() =>
 
     inputLabel: {
       color: `${COLORS.BLACK} !important`,
+      width: "75%",
+      fontSize: 14,
     },
     outlinedInput: {
       color: COLORS.BLACK,
@@ -45,9 +47,20 @@ const useStyles = makeStyles(() =>
 );
 const postalCodeMask = [/\d/, /\d/, "-", /\d/, /\d/, /\d/];
 const phoneNumberPrefixMask = ["+", /\d/, /\d/];
-const phoneNumberMask = [/\d/, /\d/, /\d/, "-",/\d/, /\d/, /\d/,"-", /\d/, /\d/, /\d/];
+const phoneNumberMask = [
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+  /\d/,
+];
 const MaskTextField = (props) => (
-
   <MuiTextField
     {...fieldToTextField(props)}
     onChange={(event) => {
@@ -57,29 +70,23 @@ const MaskTextField = (props) => (
         props.field.value[props.field.value.length - 1] === "-" &&
         value.length < props.field.value.length;
       if (!dashDeleting) {
-          switch(props.id){
-              case 'postalCode':
-                  valueToUpdate = conformToMask(
-                      value,
-                      postalCodeMask,
-                      { guide: false }
-                  ).conformedValue;
-                  break;
-              case 'phoneNumber':
-                  valueToUpdate = conformToMask(
-                      value,
-                      phoneNumberMask,
-                      { guide: false }
-                  ).conformedValue;
-                  break;
-              default:
-                  valueToUpdate = conformToMask(
-                      value,
-                      phoneNumberPrefixMask,
-                      { guide: false }
-                  ).conformedValue;
-                  break;
-          }
+        switch (props.id) {
+          case "postalCode":
+            valueToUpdate = conformToMask(value, postalCodeMask, {
+              guide: false,
+            }).conformedValue;
+            break;
+          case "phoneNumber":
+            valueToUpdate = conformToMask(value, phoneNumberMask, {
+              guide: false,
+            }).conformedValue;
+            break;
+          default:
+            valueToUpdate = conformToMask(value, phoneNumberPrefixMask, {
+              guide: false,
+            }).conformedValue;
+            break;
+        }
       } else {
         valueToUpdate = value;
       }
@@ -92,33 +99,29 @@ export const TwoFieldsForm = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.containerField}>
-        <Field
-          id={props.firstField}
-          name={props.firstField}
-          label={props.t(props.firstFieldLabel)}
-          required
-          InputLabelProps={{
-            classes: {
-              root: classes.inputLabel,
-            },
-          }}
-          InputProps={{
-            classes: {
-              root: classes.outlinedInput,
-              focused: classes.outlinedInputFocused,
-              notchedOutline: classes.notchedOutline,
-            },
-          }}
-          component={
-            props.firstField !== "street" ? MaskTextField : TextField
-          }
-          className={
-            props.shortLeft ? classes.shorterField : classes.longerField
-          }
-          margin="normal"
-          autoComplete="off"
-          variant="outlined"
-        />
+      <Field
+        id={props.firstField}
+        name={props.firstField}
+        label={props.t(props.firstFieldLabel)}
+        required
+        InputLabelProps={{
+          classes: {
+            root: classes.inputLabel,
+          },
+        }}
+        InputProps={{
+          classes: {
+            root: classes.outlinedInput,
+            focused: classes.outlinedInputFocused,
+            notchedOutline: classes.notchedOutline,
+          },
+        }}
+        component={props.firstField !== "street" ? MaskTextField : TextField}
+        className={props.shortLeft ? classes.shorterField : classes.longerField}
+        margin="normal"
+        autoComplete="off"
+        variant="outlined"
+      />
       {/*)}*/}
       <Field
         id={props.secondField}
@@ -138,7 +141,7 @@ export const TwoFieldsForm = (props) => {
           },
         }}
         component={
-            props.secondField === "phoneNumber" ? MaskTextField : TextField
+          props.secondField === "phoneNumber" ? MaskTextField : TextField
         }
         className={props.shortLeft ? classes.longerField : classes.shorterField}
         margin="normal"
