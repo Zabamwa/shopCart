@@ -1,6 +1,6 @@
 export default class UserService {
   static addUser(data, userList) {
-    userList.push(data);
+    userList.unshift(data);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({ data: userList });
