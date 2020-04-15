@@ -28,21 +28,21 @@ const useStyles = makeStyles(() =>
     },
 
     inputLabel: {
-      color: `${COLORS.BLACK} !important`,
+      color: `${COLORS.SECONDARY} !important`,
       width: "75%",
       fontSize: 14,
     },
     outlinedInput: {
-      color: COLORS.BLACK,
+      color: COLORS.SECONDARY,
     },
     outlinedInputFocused: {
-      color: COLORS.BLACK,
+      color: COLORS.SECONDARY,
     },
 
     notchedOutline: {
       borderWidth: 1,
-      borderColor: `${COLORS.BLACK} !important`,
-      color: COLORS.BLACK,
+      borderColor: `${COLORS.SECONDARY} !important`,
+      color: COLORS.PRIMARY,
     },
   })
 );

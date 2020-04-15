@@ -3,4 +3,5 @@ export const COLORS = {
   ORANGE: "#ff6c00",
   SECONDARY: "#000000",
   WHITE: "#FFFFFF",
+  GREY: "#808080",
 };

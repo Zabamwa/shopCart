@@ -8,7 +8,7 @@ import { COLORS } from "../styles/colors";
 const useStyles = makeStyles(() =>
   createStyles({
     topBarButton: {
-      color: COLORS.BLACK,
+      color: COLORS.SECONDARY,
       fontSize: 16,
       fontWeight: "bold",
       textTransform: "capitalize",
