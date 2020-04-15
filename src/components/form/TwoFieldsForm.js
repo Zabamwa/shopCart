@@ -5,6 +5,7 @@ import { Field } from "formik";
 import { COLORS } from "../../styles/colors";
 import MuiTextField from "@material-ui/core/TextField";
 import conformToMask from "text-mask-core/src/conformToMask";
+
 const useStyles = makeStyles(() =>
   createStyles({
     containerField: {
@@ -122,7 +123,6 @@ export const TwoFieldsForm = (props) => {
         autoComplete="off"
         variant="outlined"
       />
-      {/*)}*/}
       <Field
         id={props.secondField}
         name={props.secondField}

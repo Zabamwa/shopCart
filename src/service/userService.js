@@ -1,5 +1,5 @@
 export default class UserService {
-  static async addUser(data, userList) {
+  static addUser(data, userList) {
     userList.push(data);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -8,7 +8,7 @@ export default class UserService {
     });
   }
 
-  static async getUser(data, userList) {
+  static getUser(data, userList) {
     const user = userList.find((user) => user.id === Number(data));
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -17,7 +17,7 @@ export default class UserService {
     });
   }
 
-  static async editUser(data, userList) {
+  static editUser(data, userList) {
     const user = userList.find((user) => user.id === Number(data.id));
     const index = userList.indexOf(user);
     userList.splice(index, 1);

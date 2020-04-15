@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import FormControl from "@material-ui/core/FormControl";
-import { FormControlLabel } from "@material-ui/core";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import Button from "@material-ui/core/Button";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 import { RadioGroup, TextField } from "formik-material-ui";
@@ -17,7 +18,6 @@ import {
 } from "../../utils/validators";
 import { countryList } from "../../constants/countryList";
 import { TwoFieldsForm } from "./TwoFieldsForm";
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import OrderForm from "../../model/userModel";
 import { ORDER_TYPE } from "../../constants/orderType";
 

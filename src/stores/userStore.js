@@ -83,23 +83,6 @@ class UserStore {
     const result = await userService.getUser(id, this.userList);
     this.setUser(result.data);
   };
-
-  @action
-  resetUser = () => {
-    this.setUser({
-      id: "",
-      firstName: "",
-      lastName: "",
-      companyName: "",
-      companyNip: "",
-      country: "",
-      street: "",
-      addressNumber: "",
-      city: "",
-      phoneNumberPrefix: "",
-      phoneNumber: "",
-    });
-  };
 }
 
 export default new UserStore();
